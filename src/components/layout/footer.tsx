@@ -1,21 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Container } from "../ui/container";
 import { NeuButton } from "../ui/neu-button";
 import { NeuInput } from "../ui/neu-input";
-import { ArrowUp, Leaf, Mail, Phone, MapPin } from "lucide-react";
+import { NeuDialog, NeuDialogActions } from "../ui/neu-dialog";
+import { ArrowUp, Leaf, Mail, CheckCircle2 } from "lucide-react";
 import { LinkedInIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from "../ui/social-icons";
 
 export function Footer() {
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [email, setEmail] = useState("");
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for subscribing to our newsletter!");
+    setShowSuccessDialog(true);
+    setEmail("");
   };
 
   return (
@@ -143,6 +148,8 @@ export function Footer() {
                   type="email"
                   placeholder="Enter email address"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   aria-label="Email for Newsletter"
                   className="rounded-full shadow-neu-inset px-4 py-2.5 h-11"
                 />
@@ -180,6 +187,36 @@ export function Footer() {
           </button>
         </div>
       </Container>
+
+      {/* Success Dialog */}
+      <NeuDialog
+        open={showSuccessDialog}
+        onOpenChange={setShowSuccessDialog}
+      >
+        <div className="flex flex-col items-center text-center gap-4 py-4">
+          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-brand-primary/10 shadow-neu-inset">
+            <CheckCircle2 className="w-8 h-8 text-brand-primary" />
+          </div>
+          
+          <h3 className="text-xl font-display font-bold text-foreground">
+            Successfully Subscribed!
+          </h3>
+          
+          <p className="text-sm text-muted/90 leading-relaxed">
+            Thank you for subscribing to our newsletter! You'll receive the latest regulatory updates, policy papers, and industry insights directly in your inbox.
+          </p>
+
+          <NeuDialogActions className="w-full justify-center">
+            <NeuButton
+              onClick={() => setShowSuccessDialog(false)}
+              variant="primary"
+              className="px-8"
+            >
+              Got it!
+            </NeuButton>
+          </NeuDialogActions>
+        </div>
+      </NeuDialog>
     </footer>
   );
 }
