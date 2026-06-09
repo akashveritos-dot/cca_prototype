@@ -4,42 +4,56 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { verify } from 'jsonwebtoken';
 
-export function middleware(request: NextRequest) {
+// Tell Next.js to use Node.js runtime instead of Edge
+export const config = {
+  matcher: '/admin/:path*',
+  runtime: 'nodejs',
+};
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for login page and API routes
-  if (pathname === '/admin/login' || pathname.startsWith('/api/')) {
+  // Skip middleware for login page, API routes, and static files
+  if (
+    pathname === '/admin/login' || 
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/static/')
+  ) {
     return NextResponse.next();
   }
 
   // Check if route is an admin route
   if (pathname.startsWith('/admin')) {
-    // Get token from cookie or Authorization header
-    const token = request.cookies.get('auth_token')?.value || 
-                  request.headers.get('authorization')?.replace('Bearer ', '');
+    // Get token from cookie
+    const token = request.cookies.get('auth_token')?.value;
+
+    console.log('🔍 Middleware Check:', {
+      path: pathname,
+      hasToken: !!token
+    });
 
     if (!token) {
-      // Redirect to login if no token
+      console.log('❌ No token found, redirecting to login');
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
 
     try {
+      // Dynamically import jsonwebtoken (only works in Node.js runtime)
+      const { verify } = await import('jsonwebtoken');
+      
       // Verify JWT token
       const decoded = verify(token, process.env.JWT_SECRET || 'your-secret-key');
+      console.log('✅ Token valid for:', (decoded as any).email);
       
       // Token is valid, allow access
       return NextResponse.next();
     } catch (error) {
-      // Invalid token, redirect to login
+      console.log('❌ Invalid token:', error);
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
   }
 
   return NextResponse.next();
 }
-
-export const config = {
-  matcher: '/admin/:path*',
-};

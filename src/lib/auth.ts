@@ -61,6 +61,7 @@ export function hasRole(user: User | null, roleName: string): boolean {
  */
 export async function login(email: string, password: string): Promise<{ success: boolean; error?: string; user?: User }> {
   try {
+    console.log('Sending login request...');
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -68,14 +69,18 @@ export async function login(email: string, password: string): Promise<{ success:
       body: JSON.stringify({ email, password }),
     });
 
+    console.log('Login response status:', response.status);
     const data = await response.json();
+    console.log('Login response data:', data);
 
     if (!response.ok) {
       return { success: false, error: data.error || 'Login failed' };
     }
 
+    console.log('Login successful!');
     return { success: true, user: data.data.user };
   } catch (error) {
+    console.error('Login network error:', error);
     return { success: false, error: 'Network error' };
   }
 }

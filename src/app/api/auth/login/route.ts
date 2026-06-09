@@ -109,10 +109,12 @@ export async function POST(request: NextRequest) {
     });
 
     // Set HttpOnly, Secure cookie (protects against XSS)
-    response.cookies.set('auth_token', token, {
+    response.cookies.set({
+      name: 'auth_token',
+      value: token,
       httpOnly: true,    // Cannot be accessed by JavaScript
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-      sameSite: 'strict', // CSRF protection
+      secure: false, // Allow in development (HTTP)
+      sameSite: 'lax', // Less strict for development
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     });

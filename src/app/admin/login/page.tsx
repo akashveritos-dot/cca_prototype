@@ -21,18 +21,28 @@ export default function AdminLoginPage() {
     setError('');
     setLoading(true);
 
-    const result = await login(email, password);
+    try {
+      console.log('Attempting login...');
+      const result = await login(email, password);
+      console.log('Login result:', result);
 
-    if (!result.success) {
-      setError(result.error || 'Login failed');
+      if (!result.success) {
+        setError(result.error || 'Login failed');
+        setLoading(false);
+        return;
+      }
+
+      console.log('Login successful, redirecting...');
+      // Success! Force full page navigation
+      setTimeout(() => {
+        window.location.replace('/admin');
+      }, 500);
+      
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('An error occurred. Please try again.');
       setLoading(false);
-      return;
     }
-
-    // Redirect to admin dashboard
-    // Token is now in HttpOnly cookie (secure)
-    router.push('/admin');
-    router.refresh();
   };
 
   return (
