@@ -7,10 +7,11 @@ import { query } from '@/lib/db/mysql';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await query('DELETE FROM media WHERE id = ?', [params.id]);
+    const { id } = await params;
+    await query('DELETE FROM media WHERE id = ?', [id]);
     return NextResponse.json({ success: true, message: 'Media deleted' });
   } catch (error: any) {
     return NextResponse.json(

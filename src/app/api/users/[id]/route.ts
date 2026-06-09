@@ -6,11 +6,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db/mysql';
 import bcrypt from 'bcryptjs';
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const user = await query(
       'SELECT id, email, first_name, last_name, avatar_url, status, last_login_at, login_count, created_at FROM users WHERE id = ? LIMIT 1',
-      [params.id]
+      [id]
     );
     
     if (!user || user.length === 0) {
@@ -23,8 +24,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { email, password, first_name, last_name, status } = body;
 
@@ -36,7 +38,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       }
 
       // Check if email is already taken by another user
-      const existing = await query('SELECT id FROM users WHERE email = ? AND id != ?', [email, params.id]);
+      const existing = await query('SELECT id FROM users WHERE email = ? AND id != ?', [email, id]);
       if (existing && existing.length > 0) {
         return NextResponse.json({ success: false, error: 'Email already exists' }, { status: 409 });
       }
@@ -44,7 +46,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     // If password is provided, hash it
     let updateQuery = 'UPDATE users SET email = ?, first_name = ?, last_name = ?, status = ? WHERE id = ?';
-    let updateParams = [email, first_name, last_name, status, params.id];
+    let updateParams = [email, first_name, last_name, status, id];
 
     if (password) {
       if (password.length < 8) {
@@ -52,7 +54,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       }
       const password_hash = await bcrypt.hash(password, 10);
       updateQuery = 'UPDATE users SET email = ?, password_hash = ?, first_name = ?, last_name = ?, status = ? WHERE id = ?';
-      updateParams = [email, password_hash, first_name, last_name, status, params.id];
+      updateParams = [email, password_hash, first_name, last_name, status, id];
     }
 
     await query(updateQuery, updateParams);
@@ -62,14 +64,15 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     // Prevent deleting user ID 1 (super admin)
-    if (params.id === '1') {
+    if (id === '1') {
       return NextResponse.json({ success: false, error: 'Cannot delete super admin' }, { status: 403 });
     }
 
-    await query('DELETE FROM users WHERE id = ?', [params.id]);
+    await query('DELETE FROM users WHERE id = ?', [id]);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

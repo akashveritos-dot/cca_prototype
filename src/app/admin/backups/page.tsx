@@ -8,8 +8,17 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '@/components/admin/PageHeader';
 import DataTable, { Column } from '@/components/admin/DataTable';
 
+interface Backup {
+  id: number;
+  filename: string;
+  file_size: number;
+  backup_type: string;
+  status: string;
+  created_at: string;
+}
+
 export default function BackupsPage() {
-  const [backups, setBackups] = useState([]);
+  const [backups, setBackups] = useState<Backup[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
 

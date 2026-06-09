@@ -64,12 +64,12 @@ export async function POST(request: NextRequest) {
     const fileUrl = `/uploads/${folder}/${filename}`;
 
     // Get image dimensions if it's an image
-    let width = null;
-    let height = null;
+    let width: number | undefined = undefined;
+    let height: number | undefined = undefined;
     
     if (file.type.startsWith('image/')) {
       // You can use sharp library here to get dimensions and optimize
-      // For now, we'll leave it as null
+      // For now, we'll leave it as undefined
     }
 
     // Save to database

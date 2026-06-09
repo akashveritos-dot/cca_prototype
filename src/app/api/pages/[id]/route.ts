@@ -10,10 +10,11 @@ import { getPageById, updatePage, deletePage } from '@/lib/db/queries';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const page = await getPageById(parseInt(params.id));
+    const { id } = await params;
+    const page = await getPageById(parseInt(id));
     
     if (!page) {
       return NextResponse.json(
@@ -34,11 +35,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const pageId = parseInt(params.id);
+    const pageId = parseInt(id);
 
     await updatePage(pageId, body);
 
@@ -54,10 +56,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const pageId = parseInt(params.id);
+    const { id } = await params;
+    const pageId = parseInt(id);
     await deletePage(pageId);
 
     return NextResponse.json({ success: true, message: 'Page deleted successfully' });

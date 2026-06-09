@@ -8,8 +8,15 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '@/components/admin/PageHeader';
 import DataTable, { Column } from '@/components/admin/DataTable';
 
+interface Role {
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+}
+
 export default function RolesPage() {
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

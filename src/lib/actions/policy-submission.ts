@@ -1,7 +1,7 @@
 "use server";
 
 import { policySubmissionSchema } from "../validation";
-import { isRateLimited } from "../rate-limit";
+import { rateLimit } from "../rate-limit";
 import { headers } from "next/headers";
 
 export async function submitPolicyRecommendation(formData: any) {
@@ -9,8 +9,8 @@ export async function submitPolicyRecommendation(formData: any) {
   const ip = headerList.get("x-forwarded-for") || "127.0.0.1";
 
   // Check rate limit (Max 5 submissions per hour)
-  const isLimited = isRateLimited(ip, { intervalMs: 3600000, maxRequests: 5 });
-  if (isLimited) {
+  const { allowed } = rateLimit(ip, 5, 3600000);
+  if (!allowed) {
     return { success: false, error: "Too many submissions. Please try again later." };
   }
 

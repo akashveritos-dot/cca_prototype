@@ -7,12 +7,13 @@ import { query } from '@/lib/db/mysql';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const menus = await query<any[]>(
       'SELECT * FROM menus WHERE id = ? LIMIT 1',
-      [params.id]
+      [id]
     );
 
     if (menus.length === 0) {
@@ -33,13 +34,14 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     await query(
       'UPDATE menus SET name = ?, location = ?, description = ?, status = ? WHERE id = ?',
-      [body.name, body.location, body.description, body.status, params.id]
+      [body.name, body.location, body.description, body.status, id]
     );
     return NextResponse.json({ success: true });
   } catch (error: any) {
@@ -52,10 +54,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await query('DELETE FROM menus WHERE id = ?', [params.id]);
+    const { id } = await params;
+    await query('DELETE FROM menus WHERE id = ?', [id]);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json(

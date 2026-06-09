@@ -5,10 +5,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db/mysql';
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const gallery = await query('SELECT * FROM galleries WHERE id = ? LIMIT 1', [params.id]);
-    const items = await query('SELECT * FROM gallery_items WHERE gallery_id = ? ORDER BY sort_order ASC', [params.id]);
+    const { id } = await params;
+    const gallery = await query('SELECT * FROM galleries WHERE id = ? LIMIT 1', [id]);
+    const items = await query('SELECT * FROM gallery_items WHERE gallery_id = ? ORDER BY sort_order ASC', [id]);
     
     if (!gallery || gallery.length === 0) {
       return NextResponse.json({ success: false, error: 'Gallery not found' }, { status: 404 });
@@ -20,12 +21,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const body = await request.json();
     await query(
       'UPDATE galleries SET title = ?, description = ?, slug = ?, category = ?, status = ? WHERE id = ?',
-      [body.title, body.description, body.slug, body.category, body.status, params.id]
+      [body.title, body.description, body.slug, body.category, body.status, id]
     );
     return NextResponse.json({ success: true });
   } catch (error: any) {
@@ -33,9 +35,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    await query('DELETE FROM galleries WHERE id = ?', [params.id]);
+    const { id } = await params;
+    await query('DELETE FROM galleries WHERE id = ?', [id]);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
