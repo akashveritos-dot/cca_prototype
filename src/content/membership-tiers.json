@@ -1,0 +1,43 @@
+[
+  {
+    "id": "tier-individual",
+    "name": "Associate Member",
+    "price": "₹15,000",
+    "period": "yearly",
+    "description": "Ideal for individual researchers, policy experts, and independent carbon professionals looking to join the network.",
+    "benefits": [
+      "Access to monthly policy roundtables",
+      "Regular updates on CCTS & GCP regulations",
+      "Directory listing as an Associate Member",
+      "5% discount on India Climate Week tickets"
+    ]
+  },
+  {
+    "id": "tier-fpo",
+    "name": "FPO & NGO Member",
+    "price": "₹5,000",
+    "period": "yearly",
+    "description": "Subsidized tier for Farmer Producer Organizations, agricultural cooperatives, and non-profit green groups.",
+    "benefits": [
+      "Direct support for biochar & soil projects",
+      "Complimentary training in carbon auditing",
+      "Participation in local community networks",
+      "Represented in policy feedback circles"
+    ]
+  },
+  {
+    "id": "tier-corporate",
+    "name": "Corporate Patron",
+    "price": "₹1,50,000",
+    "period": "yearly",
+    "description": "Designed for large industrial groups, project developers, financial institutions, and carbon buyers.",
+    "highlighted": true,
+    "benefits": [
+      "Voting seat on CMAI/CRIA advisory councils",
+      "Early access to research publications & data",
+      "Logo branding on homepage and events",
+      "2 free passes to India Climate Week",
+      "Direct advisory support on CCTS compliance"
+    ]
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "partner-1",
+    "name": "Bureau of Energy Efficiency (BEE)",
+    "logo": "BEE",
+    "category": "Government"
+  },
+  {
+    "id": "partner-2",
+    "name": "Ministry of Power",
+    "logo": "MoP",
+    "category": "Government"
+  },
+  {
+    "id": "partner-3",
+    "name": "NITI Aayog",
+    "logo": "NITI",
+    "category": "Government"
+  },
+  {
+    "id": "partner-4",
+    "name": "Ministry of Environment, Forest & Climate Change (MoEFCC)",
+    "logo": "MoEFCC",
+    "category": "Government"
+  },
+  {
+    "id": "partner-5",
+    "name": "IIT Bombay - Carbon Lab",
+    "logo": "IITB",
+    "category": "Research"
+  },
+  {
+    "id": "partner-6",
+    "name": "Deccan Basalt Research Institute",
+    "logo": "DBRI",
+    "category": "Research"
+  },
+  {
+    "id": "partner-7",
+    "name": "National Agricultural Cooperatives (NACO)",
+    "logo": "NACO",
+    "category": "Industry"
+  },
+  {
+    "id": "partner-8",
+    "name": "Indian Steel Association",
+    "logo": "ISA",
+    "category": "Industry"
+  },
+  {
+    "id": "partner-9",
+    "name": "Voluntary Carbon Standard",
+    "logo": "VCS",
+    "category": "International"
+  },
+  {
+    "id": "partner-10",
+    "name": "Global Carbon Council",
+    "logo": "GCC",
+    "category": "International"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pillar-1",
+    "title": "Research & Science",
+    "icon": "Beaker",
+    "description": "Pioneering scientific studies on carbon dioxide removal (CDR) techniques, soil sequestration models, and MRV methodologies optimized for Indian basalt soils and agricultural conditions.",
+    "slug": "research-and-science"
+  },
+  {
+    "id": "pillar-2",
+    "title": "Policy Advocacy",
+    "icon": "FileText",
+    "description": "Collaborating closely with ministries (MoEFCC, Ministry of Power, MNRE) to shape the domestic Carbon Credit Trading Scheme (CCTS), Green Credit Programme (GCP), and Article 6 implementation.",
+    "slug": "policy-advocacy"
+  },
+  {
+    "id": "pillar-3",
+    "title": "Ecosystem Building",
+    "icon": "Users",
+    "description": "Uniting project developers, buyers, farmers' organizations, and technology providers to build a transparent, liquid, and high-integrity market structure.",
+    "slug": "ecosystem-building"
+  },
+  {
+    "id": "pillar-4",
+    "title": "Capacity Building",
+    "icon": "GraduationCap",
+    "description": "Equipping industries, developers, and farming collectives with the know-how, carbon accounting tools, and verification methodologies needed to participate in carbon markets.",
+    "slug": "capacity-building"
+  },
+  {
+    "id": "pillar-5",
+    "title": "International Engagement",
+    "icon": "Globe",
+    "description": "Connecting India's carbon market with global standards, facilitating bilateral Article 6.2 transactions, and showcasing India's climate initiatives at COP summits.",
+    "slug": "international-engagement"
+  },
+  {
+    "id": "pillar-6",
+    "title": "Knowledge Transfer",
+    "icon": "BookOpen",
+    "description": "Disseminating technical reports, policy briefs, and carbon credit market trackers to drive transparency and academic-industry collaboration.",
+    "slug": "knowledge-transfer"
+  }
+]

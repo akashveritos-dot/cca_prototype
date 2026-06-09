@@ -1,0 +1,153 @@
+========================================
+COMPLETE BACKEND - HOW TO RUN
+========================================
+
+STEP 1: EDIT .env.local
+Open .env.local and add your MySQL password:
+DB_PASSWORD=your_mysql_password_here
+
+STEP 2: CREATE DATABASE
+mysql -u root -p
+(enter your password)
+
+Then paste:
+CREATE DATABASE climate_cms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE climate_cms;
+SOURCE schema.sql;
+EXIT;
+
+STEP 3: INSTALL & RUN
+npm install
+npm run dev
+
+DONE! Backend running on:
+http://localhost:3000
+
+========================================
+ALL API ENDPOINTS READY:
+========================================
+
+✅ Authentication:
+POST /api/auth/login
+POST /api/auth/register
+
+✅ Pages:
+GET    /api/pages
+POST   /api/pages
+GET    /api/pages/[id]
+PUT    /api/pages/[id]
+DELETE /api/pages/[id]
+
+✅ Media:
+GET    /api/media
+POST   /api/media
+POST   /api/upload
+
+✅ Menus:
+GET    /api/menus
+POST   /api/menus
+GET    /api/menus/[id]
+PUT    /api/menus/[id]
+DELETE /api/menus/[id]
+
+✅ FAQs:
+GET    /api/faqs
+POST   /api/faqs
+GET    /api/faqs/[id]
+PUT    /api/faqs/[id]
+DELETE /api/faqs/[id]
+
+✅ Testimonials:
+GET    /api/testimonials
+POST   /api/testimonials
+PUT    /api/testimonials/[id]
+DELETE /api/testimonials/[id]
+
+✅ Videos:
+GET    /api/videos
+POST   /api/videos
+PUT    /api/videos/[id]
+DELETE /api/videos/[id]
+
+✅ Documents:
+GET    /api/documents
+POST   /api/documents
+PUT    /api/documents/[id]
+DELETE /api/documents/[id]
+
+✅ Galleries:
+GET    /api/galleries
+POST   /api/galleries
+GET    /api/galleries/[id]
+PUT    /api/galleries/[id]
+DELETE /api/galleries/[id]
+
+✅ Sliders:
+GET    /api/sliders
+POST   /api/sliders
+GET    /api/sliders/[id]
+PUT    /api/sliders/[id]
+DELETE /api/sliders/[id]
+
+✅ Forms:
+GET    /api/forms
+POST   /api/forms
+GET    /api/forms/[id]
+PUT    /api/forms/[id]
+DELETE /api/forms/[id]
+
+✅ Submissions:
+GET    /api/submissions
+POST   /api/submissions
+GET    /api/submissions/[id]
+PUT    /api/submissions/[id]
+DELETE /api/submissions/[id]
+
+✅ Users:
+GET    /api/users
+POST   /api/users
+GET    /api/users/[id]
+PUT    /api/users/[id]
+DELETE /api/users/[id]
+
+✅ SEO:
+GET    /api/seo
+POST   /api/seo
+
+✅ Sections:
+GET    /api/sections
+POST   /api/sections
+PUT    /api/sections/[id]
+DELETE /api/sections/[id]
+
+✅ Settings:
+GET    /api/settings
+PUT    /api/settings
+
+✅ Dashboard:
+GET    /api/dashboard/stats
+
+✅ Activity Logs:
+GET    /api/activity-logs
+POST   /api/activity-logs
+
+✅ Health Check:
+GET    /api/health
+
+========================================
+SECURITY FEATURES INCLUDED:
+========================================
+
+✅ SQL Injection Protection (Prepared Statements)
+✅ XSS Protection (Input Sanitization)
+✅ Password Hashing (bcrypt)
+✅ JWT Authentication
+✅ Role-Based Access Control
+✅ Rate Limiting
+✅ File Upload Validation
+✅ Email Validation
+✅ Strong Password Requirements
+✅ Input Sanitization Functions
+✅ Secure Headers
+
+========================================

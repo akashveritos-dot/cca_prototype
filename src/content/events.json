@@ -1,0 +1,79 @@
+[
+  {
+    "id": "event-1",
+    "title": "India Climate Week 2026",
+    "slug": "india-climate-week-2026",
+    "date": "2026-10-14T09:00:00Z",
+    "endDate": "2026-10-18T18:00:00Z",
+    "time": "09:00 AM - 06:00 PM IST",
+    "venue": "India Habitat Centre, New Delhi",
+    "description": "India Climate Week is the premier annual gathering of climate leaders, policymakers, developers, and researchers. Organized by CMAI, the 2026 edition focuses on the implementation of CCTS, Article 6 transfers, and scaling hard-tech carbon removals.",
+    "agenda": [
+      "Day 1: India's CCTS Compliance Path and Target Allocation",
+      "Day 2: Financing Transition: Voluntary Carbon Markets and Article 6",
+      "Day 3: Deep Tech Carbon Removals: Biochar, ERW, and Direct Air Capture",
+      "Day 4: Soil Sequestration, Regenerative Agriculture and Green Credits",
+      "Day 5: Youth Climate Action, Startup Pitch Competition, and Closing Plenary"
+    ],
+    "speakers": [
+      "Shri R. K. Singh (Honorable Minister, Ministry of Power)*",
+      "Dr. J. R. Sharma (Member Secretary, NITI Aayog)*",
+      "Ms. Sunita Roy (Director, Carbon Removal India Alliance)",
+      "Mr. Vikram K. (President, CMAI)",
+      "Dr. Sarah Jenkins (IPCC Lead Author)"
+    ],
+    "registrationUrl": "#register",
+    "isFlagship": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop"
+    ]
+  },
+  {
+    "id": "event-2",
+    "title": "National Roundtable: Scaling High-Permanence Carbon Removal in India",
+    "slug": "national-roundtable-scaling-carbon-removal",
+    "date": "2026-07-22T10:00:00Z",
+    "endDate": "2026-07-22T16:00:00Z",
+    "time": "10:00 AM - 04:00 PM IST",
+    "venue": "Taj Mahal Palace, Mumbai & Online",
+    "description": "Jointly hosted by CRIA and CMAI, this high-level roundtable brings together scientists, industry buyers, and regulatory bodies to outline a certification framework for high-permanence CDR methods (Biochar, ERW) under the Green Credit Programme.",
+    "agenda": [
+      "10:00 AM - Welcome and Introduction: The CDR Imperative",
+      "11:00 AM - Panel 1: Basalt and Biomass: Science of Indian Solutions",
+      "12:30 PM - Networking Lunch",
+      "01:30 PM - Panel 2: Integrity and Monitoring, Reporting, Verification (MRV)",
+      "03:00 PM - Panel 3: Aligning Voluntary Markets with Article 6.2",
+      "03:50 PM - Closing Remarks"
+    ],
+    "speakers": [
+      "Dr. A. K. Sen (Principal Investigator, Deccan Basalt Project)",
+      "Ms. Priya Iyer (Founder, CarbonTech Capital)",
+      "Mr. Rajeev Gowda (Advisor, Ministry of Environment, Forest & Climate Change)"
+    ],
+    "registrationUrl": "#register",
+    "isFlagship": false
+  },
+  {
+    "id": "event-3",
+    "title": "Capacity Building Webinar: CCTS Readiness for Obligated Entities",
+    "slug": "webinar-ccts-readiness-obligated-entities",
+    "date": "2026-05-05T15:00:00Z",
+    "endDate": "2026-05-05T17:00:00Z",
+    "time": "03:00 PM - 05:00 PM IST",
+    "venue": "Virtual (Zoom)",
+    "description": "An interactive webinar designed for compliance officers and sustainability managers in the cement, power, and iron & steel sectors. We break down calculation methodologies, baseline verifications, and trade execution strategies.",
+    "agenda": [
+      "03:00 PM - Overview of the CCTS Rules & Timelines",
+      "03:30 PM - Calculating Emission Intensities & Baselines",
+      "04:15 PM - Q&A with Policy & Technical Experts",
+      "04:55 PM - Concluding Remarks"
+    ],
+    "speakers": [
+      "Dr. Devendra Pandey (Technical Director, CMAI)",
+      "Mr. S. K. Gupta (Lead Auditor, Carbon Verification Services)"
+    ],
+    "registrationUrl": "#register",
+    "isFlagship": false
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "team-1",
+    "name": "Dr. Aranya Sen",
+    "role": "Chief Scientific Officer & Founder, CRIA",
+    "bio": "Dr. Sen is a geochemist with over 18 years of experience studying mineral-based carbon sequestration. Formerly a professor at IIT Bombay, she now leads CRIA's research on Enhanced Rock Weathering.",
+    "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Leadership"
+  },
+  {
+    "id": "team-2",
+    "name": "Vikram Malhotra",
+    "role": "Executive President, CMAI",
+    "bio": "Vikram has spent 20 years in carbon finance and policy advocacy. He has advised several government committees on the formulation of the Carbon Credit Trading Scheme (CCTS).",
+    "photo": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Leadership"
+  },
+  {
+    "id": "team-3",
+    "name": "Ananya Roy",
+    "role": "Director of Policy & Advocacy, CMAI",
+    "bio": "Ananya specializes in environmental law and market-based instruments. She leads regulatory engagement with the MoEFCC and NITI Aayog regarding Article 6 compliance.",
+    "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Leadership"
+  },
+  {
+    "id": "team-4",
+    "name": "Dr. Robert Vance",
+    "role": "Global Advisory Board Member, CRIA",
+    "bio": "A leading international expert in negative emissions technologies. Dr. Vance advises on international standards alignment and methodology verification for high-permanence CDR.",
+    "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Advisors"
+  },
+  {
+    "id": "team-5",
+    "name": "Meera Swaminathan",
+    "role": "Head of Agricultural Relations, CRIA",
+    "bio": "Meera acts as the primary liaison between CRIA and Farmer Producer Organizations (FPOs). She oversees the implementation and community engagement for Biochar projects.",
+    "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Team"
+  },
+  {
+    "id": "team-6",
+    "name": "Aditya Verma",
+    "role": "Lead Carbon Auditor & Analyst, CMAI",
+    "bio": "Aditya manages project verification audits and carbon accounting models. He has guided over 50 projects through international registry validations (Verra, Gold Standard).",
+    "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Team"
+  },
+  {
+    "id": "team-7",
+    "name": "Prof. S. R. Deshmukh",
+    "role": "Advisory Board Chairman",
+    "bio": "Prof. Deshmukh is a renowned ecologist who advises the government on the Green Credit Programme. He guides CMAI on biodiversity and ecosystem co-benefit frameworks.",
+    "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
+    "linkedIn": "https://linkedin.com",
+    "category": "Board"
+  }
+]

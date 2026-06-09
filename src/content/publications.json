@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pub-1",
+    "title": "Unlocking India's CDR Potential: A Roadmap for High-Permanence Carbon Dioxide Removal",
+    "slug": "unlocking-indias-cdr-potential-roadmap",
+    "type": "Report",
+    "topic": "Carbon Dioxide Removal",
+    "year": 2026,
+    "pdfUrl": "#",
+    "excerpt": "This comprehensive roadmap outlines the deployment potentials, socio-economic benefits, and regulatory requirements for scaling biochar, enhanced rock weathering, and direct air capture in India.",
+    "author": "CRIA & Academic Partners",
+    "date": "2026-05-01"
+  },
+  {
+    "id": "pub-2",
+    "title": "CCTS Implementation: Recommended Framework for Allocation of Intensity Targets",
+    "slug": "ccts-implementation-allocation-targets-framework",
+    "type": "Policy Recommendation",
+    "topic": "Compliance Markets",
+    "year": 2026,
+    "pdfUrl": "#",
+    "excerpt": "A policy brief submitted to the Ministry of Power, suggesting baseline benchmarks and equity-focused allocation mechanisms for the phase-1 of the Carbon Credit Trading Scheme.",
+    "author": "CMAI Secretariat",
+    "date": "2026-04-10"
+  },
+  {
+    "id": "pub-3",
+    "title": "Co-benefits of Biochar Application in Smallholder Indian Agriculture",
+    "slug": "cobenefits-biochar-smallholder-agriculture",
+    "type": "Report",
+    "topic": "Agriculture & Soil Sequestration",
+    "year": 2025,
+    "pdfUrl": "#",
+    "excerpt": "Analyzing soil moisture retention, microbial activity increases, and fertilizer reduction savings in rainfed farming systems using biochar soil amendments.",
+    "author": "CRIA Research Network",
+    "date": "2025-11-18"
+  },
+  {
+    "id": "pub-4",
+    "title": "Bilateral Carbon Trading under Article 6.2: Opportunities for Indian Project Developers",
+    "slug": "bilateral-carbon-trading-article-6-2",
+    "type": "Issue Brief",
+    "topic": "Article 6 & International Markets",
+    "year": 2025,
+    "pdfUrl": "#",
+    "excerpt": "A comprehensive primer explaining the mechanism of ITMOs, the role of corresponding adjustments, and the current bilateral agreements between India and partner nations.",
+    "author": "CMAI Advisory Group",
+    "date": "2025-09-05"
+  },
+  {
+    "id": "pub-5",
+    "title": "Assessing the Integrity of Nature-Based Solutions in India's Carbon Portfolio",
+    "slug": "assessing-integrity-nature-based-solutions",
+    "type": "Op-Ed",
+    "topic": "Voluntary Carbon Market",
+    "year": 2025,
+    "pdfUrl": "#",
+    "excerpt": "A deep dive into additionality, permanence, and social safeguards in afforestation and reforestation projects in the Western Ghats and Himalayan regions.",
+    "author": "CRIA Advisory Council",
+    "date": "2025-07-22"
+  }
+]

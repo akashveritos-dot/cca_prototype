@@ -1,0 +1,32 @@
+[
+  {
+    "id": "job-1",
+    "title": "Senior Carbon Project Auditor",
+    "org": "CMAI",
+    "location": "New Delhi / Remote",
+    "type": "Full-time",
+    "description": "We are seeking a Senior Carbon Auditor to lead validation and verification activities under CCTS and voluntary registries. Experience in Gold Standard, Verra, or GCC frameworks is required.",
+    "applyUrl": "#apply",
+    "date": "2026-05-18"
+  },
+  {
+    "id": "job-2",
+    "title": "Agricultural Research Associate (Biochar)",
+    "org": "CRIA",
+    "location": "Bhopal, MP (Field & Office)",
+    "type": "Full-time",
+    "description": "Join our field research team to coordinate soil sampling, biochar kiln deployments, and carbon sequestration measurements in collaboration with local FPOs.",
+    "applyUrl": "#apply",
+    "date": "2026-05-15"
+  },
+  {
+    "id": "job-3",
+    "title": "Climate Policy Analyst",
+    "org": "CMAI",
+    "location": "New Delhi",
+    "type": "Full-time",
+    "description": "Analyze legislative developments surrounding the Green Credit Programme (GCP) and Article 6. Draft policy briefs, research papers, and responses to draft regulations.",
+    "applyUrl": "#apply",
+    "date": "2026-05-02"
+  }
+]

@@ -1,0 +1,46 @@
+========================================
+HOW TO START THE CMS BACKEND
+========================================
+
+STEP 1: UPDATE .env.local
+--------------------------
+Open .env.local and set your MySQL credentials:
+- DB_HOST=localhost
+- DB_USER=root
+- DB_PASSWORD=your_password
+- DB_NAME=climate_cms
+
+STEP 2: CREATE DATABASE
+------------------------
+mysql -u root -p
+CREATE DATABASE climate_cms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE climate_cms;
+SOURCE schema.sql;
+EXIT;
+
+STEP 3: INSTALL PACKAGES
+-------------------------
+npm install
+
+STEP 4: RUN SERVER
+------------------
+npm run dev
+
+STEP 5: ACCESS
+--------------
+Frontend: http://localhost:3000
+Admin Panel: http://localhost:3000/admin
+API Health: http://localhost:3000/api/health
+
+========================================
+TEST API ENDPOINTS
+========================================
+
+GET  http://localhost:3000/api/health
+GET  http://localhost:3000/api/pages
+POST http://localhost:3000/api/pages
+GET  http://localhost:3000/api/media
+GET  http://localhost:3000/api/settings
+GET  http://localhost:3000/api/dashboard/stats
+
+========================================
