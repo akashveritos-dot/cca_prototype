@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Allow mobile access on local network
+  allowedDevOrigins: ['10.58.173.175'],
 };
 
 export default nextConfig;

@@ -6,7 +6,7 @@ import { Container } from "../ui/container";
 import { NeuButton } from "../ui/neu-button";
 import { NeuInput } from "../ui/neu-input";
 import { NeuDialog, NeuDialogActions } from "../ui/neu-dialog";
-import { ArrowUp, Leaf, Mail, CheckCircle2 } from "lucide-react";
+import { ArrowUp, Layers, Mail, CheckCircle2 } from "lucide-react";
 import { LinkedInIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from "../ui/social-icons";
 
 export function Footer() {
@@ -35,19 +35,23 @@ export function Footer() {
           <div className="lg:col-span-4 flex flex-col gap-5">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-background shadow-neu-raised group-hover:shadow-neu-inset transition-all duration-300">
-                <Leaf className="w-5 h-5 text-brand-primary" />
+                <svg className="w-5 h-5 text-brand-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <div className="flex flex-col">
                 <span className="font-display font-extrabold text-base tracking-tight leading-none text-foreground">
-                  CCAI
+                  DCRF
                 </span>
                 <span className="text-[10px] font-bold text-muted uppercase tracking-widest leading-none mt-1">
-                  Climate Carbon Alliance
+                  Disaster & Climate Resilience
                 </span>
               </div>
             </Link>
             <p className="text-sm text-muted/90 leading-relaxed font-medium">
-              Accelerating India's transition to Net Zero by building a high-integrity carbon market and promoting durable, high-permanence Carbon Dioxide Removal (CDR) solutions.
+              A joint-venture federation of TCU Impact Foundation (TCUIF) and DiCAF, uniting India for disaster resilience and climate action.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3 mt-2">
@@ -93,11 +97,11 @@ export function Footer() {
           {/* Column 2: Quick Links */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <h3 className="text-xs font-extrabold uppercase tracking-widest text-brand-primary">
-              Alliance
+              Federation
             </h3>
             <ul className="flex flex-col gap-2.5">
-              {["About Us", "Our Work", "Team & Board", "Careers", "Contact"].map((item, idx) => {
-                const paths = ["/about", "/our-work", "/team", "/careers", "/contact"];
+              {["About Us", "The Federation", "Annual Event", "Founding Partners", "Contact"].map((item, idx) => {
+                const paths = ["/about", "/federation", "/event", "/partners", "/contact"];
                 return (
                   <li key={idx}>
                     <Link
@@ -118,8 +122,8 @@ export function Footer() {
               Resources
             </h3>
             <ul className="flex flex-col gap-2.5">
-              {["Policy Briefs", "Scientific Reports", "Events & News", "Membership Tiers"].map((item, idx) => {
-                const paths = ["/resources", "/resources", "/news", "/membership"];
+              {["Insights & Data", "News Platform", "Working Groups", "Membership Tiers"].map((item, idx) => {
+                const paths = ["/insights", "/news", "/federation#working-groups", "/membership"];
                 return (
                   <li key={idx}>
                     <Link
@@ -140,7 +144,7 @@ export function Footer() {
               Stay Informed
             </h3>
             <p className="text-sm text-muted/90 font-medium">
-              Subscribe to our monthly newsletter for the latest regulatory updates, policy papers, and industry insights.
+              Subscribe to our newsletter for the latest disaster preparedness insights, climate resilience updates, and policy developments.
             </p>
             <form onSubmit={handleSubscribe} className="flex gap-2.5 mt-1 items-end">
               <div className="flex-1">
@@ -170,7 +174,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs text-muted/80 font-semibold">
-            © {new Date().getFullYear()} Climate Carbon Alliance India. All rights reserved.
+            © {new Date().getFullYear()} Disaster & Climate Resilience Federation. All rights reserved.
           </div>
           
           <div className="flex items-center gap-6 text-xs text-muted font-semibold">
@@ -203,7 +207,7 @@ export function Footer() {
           </h3>
           
           <p className="text-sm text-muted/90 leading-relaxed">
-            Thank you for subscribing to our newsletter! You'll receive the latest regulatory updates, policy papers, and industry insights directly in your inbox.
+            Thank you for subscribing to our newsletter! You'll receive the latest disaster preparedness insights, climate resilience updates, and policy developments directly in your inbox.
           </p>
 
           <NeuDialogActions className="w-full justify-center">

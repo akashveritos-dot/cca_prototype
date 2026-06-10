@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import SplashScreen from "@/components/brand/SplashScreen";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,48 +20,51 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Climate Carbon Alliance India (CCAI)",
-    template: "%s | Climate Carbon Alliance India",
+    default: "DCRF - Disaster & Climate Resilience Federation",
+    template: "%s | DCRF",
   },
   description:
-    "Accelerating India's transition to Net Zero through high-integrity carbon markets and high-permanence carbon dioxide removal (CDR) ecosystems.",
+    "A joint-venture federation of TCU Impact Foundation (TCUIF) and DiCAF, uniting corporates, NGOs, academia, government and experts to advance disaster preparedness, climate resilience and sustainable development across India.",
   keywords: [
-    "Carbon Removal India",
-    "Carbon Markets India",
-    "CDR India",
-    "Biochar India",
-    "CCTS India",
-    "Green Credit Programme",
-    "Climate Change India",
-    "Net Zero India",
+    "Disaster Management India",
+    "Climate Resilience",
+    "Disaster Preparedness",
+    "Climate Action India",
+    "Disaster Tech",
+    "Geospatial Technology",
+    "Climate Finance",
+    "Disaster Risk Assessment",
+    "TCUIF",
+    "DiCAF",
+    "disastersnews.com",
   ],
-  authors: [{ name: "Climate Carbon Alliance India" }],
-  creator: "Climate Carbon Alliance India",
-  metadataBase: new URL("https://climatecarbonalliance.in"),
+  authors: [{ name: "Disaster & Climate Resilience Federation" }],
+  creator: "Disaster & Climate Resilience Federation",
+  metadataBase: new URL("https://dcrf.org.in"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://climatecarbonalliance.in",
-    title: "Climate Carbon Alliance India (CCAI)",
+    url: "https://dcrf.org.in",
+    title: "DCRF - Disaster & Climate Resilience Federation",
     description:
-      "Accelerating India's transition to Net Zero through high-integrity carbon markets and high-permanence carbon dioxide removal (CDR) ecosystems.",
-    siteName: "Climate Carbon Alliance India",
+      "Uniting India for Disaster Resilience & Climate Action. A national federation advancing disaster preparedness and climate resilience.",
+    siteName: "Disaster & Climate Resilience Federation",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Climate Carbon Alliance India (CCAI)",
+    title: "DCRF - Disaster & Climate Resilience Federation",
     description:
-      "Accelerating India's transition to Net Zero through high-integrity carbon markets and high-permanence carbon dioxide removal (CDR) ecosystems.",
+      "Uniting India for Disaster Resilience & Climate Action. A national federation advancing disaster preparedness and climate resilience.",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#edf1f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e2230" },
+    { media: "(prefers-color-scheme: light)", color: "#e6e9ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2530" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -82,17 +86,19 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-full focus:shadow-lg focus:outline-none"
-          >
-            Skip to main content
-          </a>
-          <Navbar />
-          <main id="main-content" className="flex-1 focus:outline-none">
-            {children}
-          </main>
-          <Footer />
+          <SplashScreen>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-full focus:shadow-lg focus:outline-none"
+            >
+              Skip to main content
+            </a>
+            <Navbar />
+            <main id="main-content" className="flex-1 focus:outline-none">
+              {children}
+            </main>
+            <Footer />
+          </SplashScreen>
         </ThemeProvider>
       </body>
     </html>

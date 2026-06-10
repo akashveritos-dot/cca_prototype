@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "../ui/container";
 import { NeuCard } from "../ui/neu-card";
 import { getPartners } from "@/lib/content/api";
+import { Shield } from "lucide-react";
 
 export async function PartnersMarquee() {
   const partners = await getPartners();
@@ -10,14 +11,21 @@ export async function PartnersMarquee() {
   const marqueeItems = [...partners, ...partners, ...partners];
 
   return (
-    <section className="py-12 bg-background border-y border-border/15 overflow-hidden">
-      <Container className="mb-8 text-center">
-        <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest">
-          Trusted Ecosystem
+    <section className="py-12 bg-background/80 border-y border-brand-primary/10 overflow-hidden relative">
+      {/* Decorative scan line */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-primary/5 to-transparent pointer-events-none" />
+      
+      <Container className="mb-8 text-center relative z-10">
+        <span className="inline-flex items-center gap-2 text-[10px] font-bold text-brand-primary uppercase tracking-widest">
+          <Shield className="w-3 h-3" />
+          Federation Network
         </span>
         <h2 className="text-sm font-extrabold text-muted uppercase tracking-widest mt-1">
-          Collaborative Institutional Networks
+          Our Partners & Members
         </h2>
+        <p className="text-xs text-muted/80 mt-2 max-w-xl mx-auto">
+          Corporates, NGOs, Government Agencies, Research Institutions & Disaster Management Experts
+        </p>
       </Container>
       
       <div className="marquee-container relative w-full">
@@ -35,9 +43,9 @@ export async function PartnersMarquee() {
                 variant="raised"
                 hoverEffect="press"
                 interactive
-                className="px-6 py-3.5 flex items-center gap-3 border border-white/5 bg-background shadow-neu-raised rounded-2xl whitespace-nowrap min-w-[200px]"
+                className="px-6 py-3.5 flex items-center gap-3 border border-brand-primary/10 hover:border-brand-primary/30 bg-background shadow-neu-raised rounded-2xl whitespace-nowrap min-w-[200px] transition-all duration-300"
               >
-                <div className="w-7 h-7 rounded-lg bg-brand-primary/10 flex items-center justify-center font-extrabold text-brand-primary text-xs tracking-tighter">
+                <div className="w-7 h-7 rounded-lg bg-brand-primary/10 flex items-center justify-center font-extrabold text-brand-primary text-xs tracking-tighter border border-brand-primary/20">
                   {partner.logo}
                 </div>
                 <div className="flex flex-col">

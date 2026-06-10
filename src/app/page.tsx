@@ -1,9 +1,9 @@
 import React from "react";
 import { Hero } from "@/components/home/hero";
-import { MissionStrip } from "@/components/home/mission-strip";
+import { WhoWeAre } from "@/components/home/who-we-are";
 import { PillarsSection } from "@/components/home/pillars-section";
+import { WorkingGroupsPreview } from "@/components/home/working-groups-preview";
 import { ImpactDashboard } from "@/components/home/impact-dashboard";
-import { WhyItMatters } from "@/components/home/why-it-matters";
 import { FeaturedNews } from "@/components/home/featured-news";
 import { PartnersMarquee } from "@/components/home/partners-marquee";
 import { EventTeaser } from "@/components/home/event-teaser";
@@ -11,28 +11,28 @@ import { EventTeaser } from "@/components/home/event-teaser";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Hero Section */}
+      {/* 1. Hero Section - DCRF Mission */}
       <Hero />
 
-      {/* 2. Mission Strip */}
-      <MissionStrip />
+      {/* 2. Who We Are - Joint Venture Introduction */}
+      <WhoWeAre />
 
-      {/* 3. Pillars of Action */}
+      {/* 3. Three Pillars - Core Structure */}
       <PillarsSection />
 
-      {/* 4. Impact Dashboard */}
+      {/* 4. Working Groups Preview */}
+      <WorkingGroupsPreview />
+
+      {/* 5. Impact Dashboard - Disaster & Resilience Metrics */}
       <ImpactDashboard />
 
-      {/* 5. Carbon Lifecycle Explorer */}
-      <WhyItMatters />
-
-      {/* 6. Featured News & Articles */}
+      {/* 6. Featured News - disastersnews.com */}
       <FeaturedNews />
 
-      {/* 7. Ecosystem Partners Marquee */}
+      {/* 7. Partners & Members */}
       <PartnersMarquee />
 
-      {/* 8. Flagship Event Teaser */}
+      {/* 8. Annual Event Teaser */}
       <EventTeaser />
     </div>
   );

@@ -1,9 +1,19 @@
 -- =====================================================
 -- COMPLETE CMS DATABASE SCHEMA FOR DYNAMIC WEBSITE
--- Climate Carbon Alliance - MySQL Database Schema
+-- Disaster & Climate Resilience Federation (DCRF) - MySQL Database Schema
 -- =====================================================
 
 -- Drop existing tables if they exist (in reverse dependency order)
+DROP TABLE IF EXISTS newsletter_subscriptions;
+DROP TABLE IF EXISTS india_state_risks;
+DROP TABLE IF EXISTS disaster_data;
+DROP TABLE IF EXISTS news_articles;
+DROP TABLE IF EXISTS partners;
+DROP TABLE IF EXISTS awards;
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS working_groups;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS leadership;
 DROP TABLE IF EXISTS audit_logs;
 DROP TABLE IF EXISTS backups;
 DROP TABLE IF EXISTS activity_logs;
@@ -666,4 +676,327 @@ INSERT INTO section_templates (name, component_name, description, category) VALU
 
 -- =====================================================
 -- END OF SCHEMA
+-- =====================================================
+
+
+-- =====================================================
+-- 13. DCRF-SPECIFIC TABLES (DISASTER & CLIMATE RESILIENCE FEDERATION)
+-- =====================================================
+
+-- Members (Federation Membership)
+CREATE TABLE members (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    organization_name VARCHAR(255) NOT NULL,
+    contact_person VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(50),
+    tier ENUM('founding', 'institutional', 'corporate', 'individual', 'student') NOT NULL,
+    description TEXT,
+    logo_id INT UNSIGNED,
+    website VARCHAR(500),
+    industry VARCHAR(100),
+    location VARCHAR(255),
+    joined_date DATE,
+    expiry_date DATE,
+    status ENUM('pending', 'active', 'inactive', 'suspended', 'expired') DEFAULT 'pending',
+    payment_status ENUM('pending', 'paid', 'overdue') DEFAULT 'pending',
+    metadata JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (logo_id) REFERENCES media(id) ON DELETE SET NULL,
+    INDEX idx_tier (tier),
+    INDEX idx_status (status),
+    INDEX idx_email (email),
+    INDEX idx_payment_status (payment_status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Working Groups
+CREATE TABLE working_groups (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT,
+    focus_areas JSON,
+    chair_person VARCHAR(255),
+    co_chair VARCHAR(255),
+    members_count INT UNSIGNED DEFAULT 0,
+    icon VARCHAR(100),
+    color VARCHAR(50),
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    sort_order INT UNSIGNED DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_slug (slug),
+    INDEX idx_status (status),
+    INDEX idx_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Events (Annual Conferences)
+CREATE TABLE events (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    tagline VARCHAR(500),
+    description TEXT,
+    event_type ENUM('conference', 'workshop', 'webinar', 'masterclass', 'networking') DEFAULT 'conference',
+    start_date DATE NOT NULL,
+    end_date DATE,
+    venue VARCHAR(500),
+    city VARCHAR(100),
+    is_hybrid BOOLEAN DEFAULT TRUE,
+    virtual_link VARCHAR(500),
+    registration_link VARCHAR(500),
+    banner_image_id INT UNSIGNED,
+    agenda JSON,
+    sponsors JSON,
+    speakers JSON,
+    attendee_count INT UNSIGNED DEFAULT 0,
+    registration_fee DECIMAL(10, 2),
+    status ENUM('upcoming', 'ongoing', 'completed', 'cancelled') DEFAULT 'upcoming',
+    featured BOOLEAN DEFAULT FALSE,
+    metadata JSON,
+    created_by INT UNSIGNED,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (banner_image_id) REFERENCES media(id) ON DELETE SET NULL,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_slug (slug),
+    INDEX idx_status (status),
+    INDEX idx_start_date (start_date),
+    INDEX idx_featured (featured)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Awards (Recognition Categories)
+CREATE TABLE awards (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    event_id INT UNSIGNED,
+    category VARCHAR(255) NOT NULL,
+    description TEXT,
+    criteria TEXT,
+    nomination_deadline DATE,
+    winner_organization VARCHAR(255),
+    winner_contact VARCHAR(255),
+    winner_description TEXT,
+    winner_logo_id INT UNSIGNED,
+    year INT UNSIGNED NOT NULL,
+    status ENUM('open', 'closed', 'announced') DEFAULT 'open',
+    sort_order INT UNSIGNED DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE SET NULL,
+    FOREIGN KEY (winner_logo_id) REFERENCES media(id) ON DELETE SET NULL,
+    INDEX idx_event (event_id),
+    INDEX idx_year (year),
+    INDEX idx_status (status),
+    INDEX idx_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Partners (Corporate & Organizational Partners)
+CREATE TABLE partners (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT,
+    tier ENUM('platinum', 'gold', 'silver', 'bronze', 'knowledge', 'supporting') NOT NULL,
+    logo_id INT UNSIGNED NOT NULL,
+    website VARCHAR(500),
+    industry VARCHAR(100),
+    partnership_start_date DATE,
+    partnership_end_date DATE,
+    contribution_areas JSON,
+    featured BOOLEAN DEFAULT FALSE,
+    sort_order INT UNSIGNED DEFAULT 0,
+    status ENUM('active', 'inactive', 'expired') DEFAULT 'active',
+    metadata JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (logo_id) REFERENCES media(id) ON DELETE CASCADE,
+    INDEX idx_slug (slug),
+    INDEX idx_tier (tier),
+    INDEX idx_status (status),
+    INDEX idx_featured (featured),
+    INDEX idx_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- News Articles (disastersnews.com)
+CREATE TABLE news_articles (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(500) NOT NULL,
+    slug VARCHAR(500) NOT NULL UNIQUE,
+    excerpt TEXT,
+    content LONGTEXT NOT NULL,
+    category ENUM('disasters', 'climate-action', 'environment', 'disaster-tech', 'space-applications') NOT NULL,
+    subcategory VARCHAR(100),
+    featured_image_id INT UNSIGNED,
+    author_name VARCHAR(255),
+    author_id INT UNSIGNED,
+    reading_time INT UNSIGNED,
+    tags JSON,
+    location VARCHAR(255),
+    severity ENUM('low', 'medium', 'high', 'critical') DEFAULT 'medium',
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_breaking BOOLEAN DEFAULT FALSE,
+    views_count INT UNSIGNED DEFAULT 0,
+    shares_count INT UNSIGNED DEFAULT 0,
+    published_at TIMESTAMP NULL,
+    status ENUM('draft', 'published', 'archived') DEFAULT 'draft',
+    seo_title VARCHAR(255),
+    seo_description TEXT,
+    created_by INT UNSIGNED,
+    updated_by INT UNSIGNED,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (featured_image_id) REFERENCES media(id) ON DELETE SET NULL,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_slug (slug),
+    INDEX idx_category (category),
+    INDEX idx_status (status),
+    INDEX idx_published (published_at),
+    INDEX idx_featured (is_featured),
+    INDEX idx_breaking (is_breaking),
+    INDEX idx_severity (severity),
+    FULLTEXT idx_search (title, excerpt, content)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Disaster Data (For Visualizations & Statistics)
+CREATE TABLE disaster_data (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    data_type ENUM('disaster_event', 'risk_assessment', 'climate_indicator', 'economic_loss', 'demographic') NOT NULL,
+    year INT UNSIGNED,
+    month INT UNSIGNED,
+    state VARCHAR(100),
+    district VARCHAR(100),
+    disaster_type VARCHAR(100),
+    metric_name VARCHAR(255) NOT NULL,
+    metric_value DECIMAL(20, 4),
+    metric_unit VARCHAR(50),
+    affected_population INT UNSIGNED,
+    economic_loss_inr DECIMAL(20, 2),
+    fatalities INT UNSIGNED,
+    metadata JSON,
+    source VARCHAR(500),
+    verified BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_data_type (data_type),
+    INDEX idx_year (year),
+    INDEX idx_state (state),
+    INDEX idx_disaster_type (disaster_type),
+    INDEX idx_verified (verified)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- India States Risk Profile (For Map Visualization)
+CREATE TABLE india_state_risks (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    state_code VARCHAR(10) NOT NULL UNIQUE,
+    state_name VARCHAR(100) NOT NULL,
+    composite_risk_score DECIMAL(5, 2),
+    flood_risk DECIMAL(5, 2),
+    cyclone_risk DECIMAL(5, 2),
+    earthquake_risk DECIMAL(5, 2),
+    drought_risk DECIMAL(5, 2),
+    heatwave_risk DECIMAL(5, 2),
+    landslide_risk DECIMAL(5, 2),
+    population INT UNSIGNED,
+    vulnerable_population INT UNSIGNED,
+    disaster_count_5y INT UNSIGNED,
+    economic_loss_5y_inr DECIMAL(20, 2),
+    preparedness_index DECIMAL(5, 2),
+    resilience_index DECIMAL(5, 2),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_state_code (state_code),
+    INDEX idx_composite_risk (composite_risk_score)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Leadership & Governance
+CREATE TABLE leadership (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    designation VARCHAR(255) NOT NULL,
+    organization VARCHAR(255),
+    role_type ENUM('steering_committee', 'advisory_board', 'working_group_chair', 'founding_member') NOT NULL,
+    bio TEXT,
+    photo_id INT UNSIGNED,
+    linkedin_url VARCHAR(500),
+    email VARCHAR(255),
+    sort_order INT UNSIGNED DEFAULT 0,
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (photo_id) REFERENCES media(id) ON DELETE SET NULL,
+    INDEX idx_role_type (role_type),
+    INDEX idx_status (status),
+    INDEX idx_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Newsletter Subscriptions
+CREATE TABLE newsletter_subscriptions (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    organization VARCHAR(255),
+    interests JSON,
+    status ENUM('subscribed', 'unsubscribed', 'bounced') DEFAULT 'subscribed',
+    verification_token VARCHAR(255),
+    verified_at TIMESTAMP NULL,
+    unsubscribed_at TIMESTAMP NULL,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_email (email),
+    INDEX idx_status (status),
+    INDEX idx_verified (verified_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- INSERT DEFAULT DCRF DATA
+-- =====================================================
+
+-- Update site settings for DCRF
+UPDATE settings SET key_value = 'Disaster & Climate Resilience Federation' WHERE key_name = 'site_name';
+UPDATE settings SET key_value = 'Uniting India for Disaster Resilience & Climate Action' WHERE key_name = 'site_tagline';
+UPDATE settings SET key_value = 'A joint-venture federation of TCU Impact Foundation and DiCAF, advancing disaster preparedness, climate resilience and sustainable development across India.' WHERE key_name = 'site_description';
+UPDATE settings SET key_value = '© 2026 Disaster & Climate Resilience Federation. A joint venture of TCUIF and DiCAF. All rights reserved.' WHERE key_name = 'footer_text';
+
+-- Default Working Groups
+INSERT INTO working_groups (name, slug, description, icon, color, sort_order) VALUES
+('Risk Assessment & Early Warning', 'risk-assessment', 'Developing comprehensive risk assessment frameworks and early warning systems for disaster preparedness.', 'alert-triangle', '#dc2626', 1),
+('Climate Adaptation & Resilience', 'climate-adaptation', 'Building climate-resilient communities and infrastructure through adaptation strategies.', 'waves', '#ea580c', 2),
+('Disaster Technology & Innovation', 'disaster-tech', 'Leveraging technology, AI, and geospatial tools for disaster management and response.', 'satellite', '#3b82f6', 3),
+('Capacity Building & Training', 'capacity-building', 'Strengthening institutional and community capacity for disaster preparedness and response.', 'users', '#f59e0b', 4),
+('Climate Finance & Investment', 'climate-finance', 'Mobilizing financial resources and investment for climate resilience and disaster risk reduction.', 'trending-up', '#10b981', 5),
+('Post-Disaster Recovery & Reconstruction', 'recovery', 'Facilitating effective post-disaster recovery, rehabilitation, and reconstruction efforts.', 'refresh-cw', '#8b5cf6', 6);
+
+-- Default Award Categories
+INSERT INTO awards (category, description, criteria, year, status, sort_order) VALUES
+('Best Corporate Disaster Response', 'Recognizing corporate excellence in disaster response and community support during emergencies.', 'Impact, innovation, scalability, and sustainability of disaster response initiatives.', YEAR(CURDATE()), 'open', 1),
+('Best NGO Initiative', 'Honoring NGOs demonstrating outstanding disaster preparedness and community resilience programs.', 'Community impact, innovation, and long-term sustainability of programs.', YEAR(CURDATE()), 'open', 2),
+('Climate Resilient Community', 'Celebrating communities showing exemplary climate adaptation and resilience practices.', 'Community participation, measurable outcomes, and replicability.', YEAR(CURDATE()), 'open', 3),
+('Disaster-Tech Innovator', 'Recognizing breakthrough technological solutions in disaster management and climate resilience.', 'Innovation, scalability, effectiveness, and adoption potential.', YEAR(CURDATE()), 'open', 4),
+('Lifetime Achievement', 'Honoring individuals with sustained contributions to disaster management and climate action.', 'Career-long impact, leadership, and influence in the field.', YEAR(CURDATE()), 'open', 5);
+
+-- Sample India State Risk Data (Top 15 states)
+INSERT INTO india_state_risks (state_code, state_name, composite_risk_score, flood_risk, cyclone_risk, earthquake_risk, drought_risk, heatwave_risk, landslide_risk, population, disaster_count_5y) VALUES
+('AS', 'Assam', 8.5, 9.2, 2.1, 8.8, 3.2, 4.5, 7.5, 35607039, 85),
+('BR', 'Bihar', 8.2, 9.5, 0.5, 7.8, 5.5, 7.2, 2.0, 124799926, 102),
+('OD', 'Odisha', 8.8, 8.5, 9.8, 3.2, 6.5, 6.8, 4.2, 46356334, 125),
+('WB', 'West Bengal', 8.0, 8.8, 7.5, 6.5, 4.2, 5.5, 3.5, 99609303, 98),
+('UP', 'Uttar Pradesh', 7.5, 8.2, 0.2, 4.5, 6.8, 8.5, 2.5, 237882725, 145),
+('MH', 'Maharashtra', 7.2, 7.5, 5.5, 5.8, 7.2, 7.5, 4.8, 123144223, 112),
+('GJ', 'Gujarat', 7.8, 6.5, 8.2, 6.2, 7.8, 8.2, 2.0, 63872399, 95),
+('KL', 'Kerala', 7.0, 8.8, 2.5, 1.5, 2.8, 4.2, 8.5, 35699443, 88),
+('TN', 'Tamil Nadu', 7.5, 7.2, 8.5, 2.2, 6.5, 8.8, 3.0, 77841267, 105),
+('UK', 'Uttarakhand', 8.5, 8.5, 0.0, 9.5, 3.5, 5.2, 9.0, 11250858, 72),
+('HP', 'Himachal Pradesh', 8.0, 7.5, 0.0, 9.0, 4.0, 5.5, 8.8, 7451955, 65),
+('JK', 'Jammu & Kashmir', 8.2, 7.8, 0.0, 9.2, 4.5, 5.0, 8.5, 13635000, 58),
+('RJ', 'Rajasthan', 6.8, 5.5, 0.0, 3.5, 8.5, 9.0, 1.5, 81032689, 82),
+('MP', 'Madhya Pradesh', 6.5, 6.8, 0.0, 4.0, 7.5, 8.2, 3.0, 85358965, 78),
+('AP', 'Andhra Pradesh', 7.2, 7.0, 8.0, 2.5, 6.8, 7.8, 2.8, 53903393, 92);
+
+-- =====================================================
+-- END OF COMPLETE UNIFIED SCHEMA
 -- =====================================================

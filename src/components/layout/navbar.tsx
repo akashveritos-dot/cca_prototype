@@ -8,6 +8,7 @@ import { Menu, X, Sun, Moon, Leaf } from "lucide-react";
 import { NeuButton } from "../ui/neu-button";
 import { Container } from "../ui/container";
 import { motion, AnimatePresence } from "framer-motion";
+import CompactLogo from "../brand/CompactLogo";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +31,11 @@ export function Navbar() {
 
   const navLinks = [
     { name: "About", href: "/about" },
-    { name: "Our Work", href: "/our-work" },
+    { name: "Federation", href: "/federation" },
+    { name: "Annual Event", href: "/event" },
     { name: "News", href: "/news" },
-    { name: "Resources", href: "/resources" },
-    { name: "Events", href: "/events" },
-    { name: "Careers", href: "/careers" },
+    { name: "Insights", href: "/insights" },
+    { name: "Partners", href: "/partners" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -48,18 +49,8 @@ export function Navbar() {
     >
       <Container className="flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-lg px-2 py-1">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-background shadow-neu-raised group-hover:shadow-neu-inset transition-all duration-300">
-            <Leaf className="w-5 h-5 text-brand-primary group-hover:rotate-12 transition-transform duration-300" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-extrabold text-base tracking-tight leading-none text-foreground">
-              CCAI
-            </span>
-            <span className="text-[10px] font-bold text-muted uppercase tracking-widest leading-none mt-1">
-              Climate Carbon Alliance
-            </span>
-          </div>
+        <Link href="/" className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-lg px-2 py-1">
+          <CompactLogo size="md" animated={false} />
         </Link>
 
         {/* Desktop Nav Links */}
@@ -98,7 +89,7 @@ export function Navbar() {
 
           <Link href="/membership" className="hidden sm:inline-block">
             <NeuButton variant="primary" size="sm" className="px-5 py-2.5 text-xs tracking-wider uppercase">
-              Become a Member
+              Join Federation
             </NeuButton>
           </Link>
 
@@ -144,7 +135,7 @@ export function Navbar() {
               <div className="pt-4 border-t border-border/10 flex flex-col gap-3">
                 <Link href="/membership" className="w-full">
                   <NeuButton variant="primary" size="md" className="w-full uppercase tracking-wider text-xs py-3.5">
-                    Become a Member
+                    Join Federation
                   </NeuButton>
                 </Link>
               </div>

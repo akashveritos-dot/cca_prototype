@@ -54,26 +54,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation */}
-      <nav className="bg-white border-b border-gray-200">
+      <nav className="bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 border-b border-orange-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link href="/admin" className="text-2xl font-bold text-gray-900">
-                🌍 CCA CMS
+              <Link href="/admin" className="text-2xl font-bold text-white flex items-center gap-2">
+                <span className="text-3xl">🚨</span>
+                <span>DCRF Admin</span>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
               {user && (
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-orange-100">
                   👤 {user.first_name} {user.last_name}
                 </span>
               )}
-              <Link href="/" className="text-gray-600 hover:text-gray-900">
+              <Link href="/" className="text-orange-100 hover:text-white transition">
                 View Site
               </Link>
               <button 
                 onClick={logout}
-                className="text-red-600 hover:text-red-700 font-medium"
+                className="px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-lg font-medium transition"
               >
                 Logout
               </button>
@@ -85,12 +86,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar and Content */}
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)]">
+        <aside className="w-64 bg-gray-900 border-r border-gray-800 min-h-[calc(100vh-4rem)]">
           <nav className="p-4 space-y-2">
             <SidebarLink href="/admin" icon="📊" label="Dashboard" />
             
             <div className="pt-4 pb-2">
-              <p className="text-xs font-semibold text-gray-400 uppercase">Content</p>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">DCRF Modules</p>
+            </div>
+            <SidebarLink href="/admin/members" icon="👥" label="Members" highlight />
+            <SidebarLink href="/admin/newsletter" icon="📧" label="Newsletter" highlight />
+            
+            <div className="pt-4 pb-2">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Content</p>
             </div>
             <SidebarLink href="/admin/pages" icon="📄" label="Pages" />
             <SidebarLink href="/admin/sections" icon="🧩" label="Sections" />
@@ -98,7 +105,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <SidebarLink href="/admin/menus" icon="🧭" label="Menus" />
             
             <div className="pt-4 pb-2">
-              <p className="text-xs font-semibold text-gray-400 uppercase">Modules</p>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Modules</p>
             </div>
             <SidebarLink href="/admin/faqs" icon="❓" label="FAQs" />
             <SidebarLink href="/admin/testimonials" icon="💬" label="Testimonials" />
@@ -108,13 +115,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <SidebarLink href="/admin/documents" icon="📁" label="Documents" />
             
             <div className="pt-4 pb-2">
-              <p className="text-xs font-semibold text-gray-400 uppercase">Forms</p>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Forms</p>
             </div>
             <SidebarLink href="/admin/forms" icon="📋" label="Forms" />
             <SidebarLink href="/admin/submissions" icon="📬" label="Submissions" />
             
             <div className="pt-4 pb-2">
-              <p className="text-xs font-semibold text-gray-400 uppercase">System</p>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">System</p>
             </div>
             <SidebarLink href="/admin/users" icon="👥" label="Users" />
             <SidebarLink href="/admin/roles" icon="🔐" label="Roles" />
@@ -133,11 +140,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 }
 
-function SidebarLink({ href, icon, label }: { href: string; icon: string; label: string }) {
+function SidebarLink({ href, icon, label, highlight }: { href: string; icon: string; label: string; highlight?: boolean }) {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+  
   return (
     <Link
       href={href}
-      className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+      className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+        isActive 
+          ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white'
+          : highlight
+          ? 'text-orange-400 hover:bg-gray-800 hover:text-orange-300'
+          : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+      }`}
     >
       <span>{icon}</span>
       <span className="text-sm font-medium">{label}</span>
